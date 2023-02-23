@@ -1,35 +1,21 @@
 <?php
 
-$ch = curl_init();
+// GUZZLE usage
 
-$headers = [
-    "Authorization: Bearer API key"
-];
+require __DIR__ . "/vendor/autoload.php";
 
-$payload = [
-    "name" => "create from API",
-    "description" => "an example api-created repo"
-];
+$client = new GuzzleHttp\Client;
 
-curl_setopt_array(
-    $ch,
-    [
-        CURLOPT_URL => "https://api.github.com/repos/wingo-dev/Delos",
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_HTTPHEADER => $headers,
-        CURLOPT_USERAGENT => "wingo-dev",
-        CURLOPT_CUSTOMREQUEST => "POST",
-        CURLOPT_POSTFIELDS => $payload
+$response = $client->request("GET", "https://api.github.com/user/repos", [
+    "headers" => [
+        "Authorization" => "token Your_token",
+        "user-Agent" => "wingo-dev"
     ]
-);
-
-$response = curl_exec($ch);
-
-$status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-
-echo $status_code;
-
-echo $response;
+]);
 
 
-curl_close($ch);
+echo $response->getStausCode() . "\n";
+
+echo $response->getHeader("content-type")[0] . "\n";
+
+echo substr($response->getBody(), 0, 200) . "\n";
