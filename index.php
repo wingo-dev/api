@@ -1,5 +1,4 @@
 <?php
-
 $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 $parts = explode("/", $path);
@@ -18,10 +17,8 @@ if ($resource != "tasks") {
     exit;
 }
 
-
-
-
-require dirname(__DIR__) . "/api/src/controller.php";
+require dirname(__DIR__) . "\api\src\TaskController.php";
+// echo dirname(__DIR__) . "\api\src\TaskController.php";
 
 $controller = new TaskController;
 
