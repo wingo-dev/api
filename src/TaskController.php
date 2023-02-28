@@ -1,7 +1,7 @@
 <?php
 class TaskController
 {
-    public function processRequest($method, $id)
+    public function processRequest(string $method, ? string $id) : void
     {
         if ($id === null) {
             if ($method == "GET") {
