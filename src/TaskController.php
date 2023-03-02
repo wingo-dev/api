@@ -8,7 +8,9 @@ class TaskController
                 echo json_encode($this->gateway->getAll());
             }
         } elseif ($method == "POST") {
-            echo 'create';
+            $data = file_get_contents("php://input");
+            echo $data . "test successfully";
+
         } else {
 
             switch ($method) {
