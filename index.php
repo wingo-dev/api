@@ -1,5 +1,6 @@
 <?php
-declare (strict_types = 1);
+
+declare(strict_types=1);
 
 require dirname(__DIR__) . "\api\src\ErrorHandler.php";
 require dirname(__DIR__) . "\api\src\Database.php";
@@ -34,3 +35,15 @@ require dirname(__DIR__) . "\api\src\TaskController.php";
 $controller = new TaskController;
 
 $controller->processRequest($_SERVER['REQUEST_METHOD'], $id);
+
+$payload = ["username" => "david", "id" => 1];
+
+$access_token = base64_encode(json_encode($payload));
+
+echo $access_token . "<br>";
+
+echo base64_decode($access_token);
+
+$headers = apache_request_headers();
+
+echo $headers["Authorization"];
